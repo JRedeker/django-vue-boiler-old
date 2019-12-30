@@ -1,0 +1,31 @@
+<!-- Load Vue and Data -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    var todos = [{
+        message: 'Take out the trash'
+    }, {
+        message: 'Wash the dishes'
+    }]
+</script>
+
+<!-- Start HTML -->
+{% verbatim %}
+<div id="todo-app">
+    <ol>
+        <li v-for="todo in our_todos">{{ todo.message }}</li>
+    </ol>
+
+    <input type="text">
+</div>
+{% endverbatim %}
+
+
+<!-- Start JS -->
+<script>
+    var app = new Vue({
+        el: '#todo-app',
+        data: {
+            our_todos: todos
+        }
+    })
+</script>

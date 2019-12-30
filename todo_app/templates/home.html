@@ -1,0 +1,16 @@
+{% extends './layouts/base.html' %}
+<!-- Start Content -->
+{% block content %}
+
+<div class="alert alert-primary" role="alert">
+    Hello, World! It is {{ date_now }}
+</div>
+
+{% include './components/test-vue.html' %}
+
+<h5>To Do List (Vue Component):</h5>
+{% include './components/todo-list.html' with todos=todos %}
+
+
+<!-- End Content -->
+{% endblock %}

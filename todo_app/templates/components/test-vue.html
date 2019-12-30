@@ -1,0 +1,21 @@
+<!-- Start HTML -->
+{% verbatim %}
+<div id="app">
+    <div class="alert alert-success" role="alert">
+        Here is a message from a Vue component: {{ message }}
+    </div>
+</div>
+{% endverbatim %}
+
+
+<!-- Start JS -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" crossorigin="anonymous"></script>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: "Hello, Vue!"
+        }
+    })
+</script>
