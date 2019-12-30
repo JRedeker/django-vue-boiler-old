@@ -1,31 +1,91 @@
-<!-- Load Vue and Data -->
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" crossorigin="anonymous"></script>
-<script type="text/javascript">
-    var todos = [{
-        message: 'Take out the trash'
-    }, {
-        message: 'Wash the dishes'
-    }]
-</script>
-
 <!-- Start HTML -->
 {% verbatim %}
-<div id="todo-app">
-    <ol>
-        <li v-for="todo in our_todos">{{ todo.message }}</li>
-    </ol>
+<script>
+    Vue.component('todo-card', {
+        props: ['title', ],
+        template: `
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ title }}</h5>
+                    <a href="#" v-on:click="markComplete" class="btn btn-sm btn-success">Completed</a>
+                    <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        `
+    })
 
-    <input type="text">
-</div>
+    Vue.component('todo-card-completed', {
+        props: ['title', ],
+        template: '<li>{{ title }}</li>'
+    })
+</script>
 {% endverbatim %}
+
+
+
+<div id="todo-app">
+    <!-- Shoe existing todo cards -->
+    <div class="row">
+        <todo-card v-for="todo in todo_list" v-if="todo.completed == false" v-bind:key="todo.id" v-bind:title="todo.title" v-bind:info="todo.info"></todo-card>
+    </div>
+    <br>
+
+    <!-- Add new todo -->
+    <div class="row">
+        <div class="form-group col-sm-4">
+            <label for="new-todo">New Todo:</label>
+            <input type="text" class="form-control" id="new-todo">
+
+        </div>
+        <div class="form-group col-sm-4">
+            <label for="new-todo-info">Info:</label>
+            <input type="text" class="form-control" id="new-todo-info">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <button href="#" class="btn btn-primary" v-on:click="addTodo">Add Todo</button>
+        </div>
+    </div>
+
+    <!-- Show completed todos in a list -->
+    <br>
+    <h5>Completed items:</h5>
+    <div class="row">
+        <ul>
+            <todo-card-completed v-for="todo in todo_list" v-if="todo.completed" v-bind:title="todo.title"></todo-card-completed>
+        </ul>
+    </div>
+
+</div>
 
 
 <!-- Start JS -->
 <script>
-    var app = new Vue({
+    new Vue({
         el: '#todo-app',
         data: {
-            our_todos: todos
+            todo_list: [{
+                title: 'Take out the trash',
+                completed: false
+            }, {
+                title: 'Wash the dishes',
+                completed: true
+            }]
+        },
+        methods: {
+            addTodo() {
+                console.log('tried to add new todo!')
+                this.todo_list.push({
+                    title: 'New Todo',
+                    completed: false
+                })
+            },
+            markComplete() {
+                this.todo_list.pop()
+            }
         }
     })
 </script>

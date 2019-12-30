@@ -1,0 +1,33 @@
+{% verbatim %}
+<script>
+    Vue.component('button-counter', {
+        data: function() {
+            return {
+                count: 0
+            }
+        },
+        template: '<button class="btn" v-on:click="count++">You clicked me {{ count }} times.</button>'
+    })
+</script>
+{% endverbatim %}
+
+<div id="components-demo">
+    <div class="row">
+        <div class="col-md-3">
+            <button-counter></button-counter>
+        </div>
+        <div class="col-md-3">
+            <button-counter></button-counter>
+        </div>
+        <div class="col-md-3">
+            <button-counter></button-counter>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    new Vue({
+        el: '#components-demo'
+    })
+</script>
